@@ -1,0 +1,34 @@
+volumes:
+  codellama_data:
+  codellama_webui_data:
+
+services:
+  codellama_webui:
+    image: ghcr.io/open-webui/open-webui:main
+    restart: unless-stopped
+    container_name: codellama_ui
+    ports:
+      - 18080:8080/tcp
+    environment:
+      - OLLAMA_BASE_URL=http://codellama_ollama:11434
+    volumes:
+      - codellama_webui_data:/app/backend/data
+    depends_on:
+      - codellama_ollama
+
+  codellama_ollama:
+    image: ollama/ollama
+    container_name: codellama
+    restart: unless-stopped
+    volumes:
+      - codellama_data:/root/.ollama
+      - ./models/:/models/
+    ports:
+      - "11434:11434/tcp"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: ["gpu"]
+              count: all
