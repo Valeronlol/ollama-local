@@ -1,5 +1,5 @@
 # Getting started
-- Install docker nvidia toolkit: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+- Install NVIDIA Container Toolkit: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-the-nvidia-container-toolkit
 - List of models: https://ollama.com/search
 - `http://localhost:18080/` WebUI
 
